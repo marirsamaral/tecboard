@@ -3,7 +3,8 @@ import { CampoDeEntrada } from "../CampoDeEntrada";
 import { CampoDeFormulario } from "../CampoDeFormulario";
 import { Label } from "../Label";
 import { TituloFormulario } from "../TituloFormulario";
-
+import { Botao } from '../Botao';
+import { Lista } from '../Lista';
 
 export function FormularioDeEvento() {
   return (
@@ -31,7 +32,22 @@ export function FormularioDeEvento() {
           name="data-evento"/>
         </CampoDeFormulario> 
       </div>
+
+      <div className='acoes'> 
+        <Botao>
+          Criar evento
+        </Botao>
+      </div>
       
+      <CampoDeFormulario>
+          <Label
+          htmlFor="nome">
+          Qual o nome do evento?
+          </Label>
+          <Lista/>
+      </CampoDeFormulario>
+
+
     </form>
   )
 }
