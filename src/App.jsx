@@ -7,7 +7,7 @@ import {CardEvento} from './componentes/CardEvento'
 
 function App() {
 
-const temas = [
+  const temas = [
   {
     id: 1,
     nome: 'Front-end'
@@ -37,16 +37,22 @@ const temas = [
     id: 6,
     nome: 'Cloud'
   },
-]
+  ]
 
-const eventos = [
+  const eventos = [
   {
     capa: 'https://raw.githubusercontent.com/viniciosneves/tecboard-assets/refs/heads/main/imagem_1.png',
     tema: temas[0],
     data: new Date(),
     titulo: 'Mulheres no Front-end',
   }
-]
+  ]
+
+function adicionarEvento (evento) {
+  eventos.push(evento)  ERRROOO NESSA LINHAA 
+  console.log('eventos =>', eventos)
+}
+
 
   return (
 
@@ -55,13 +61,18 @@ const eventos = [
         <img src="/logo.png" alt="Logo do TechBoard" />
       </header>
       <Banner />
-      <FormularioDeEvento temas={temas} />
+      <FormularioDeEvento temas={temas} aoSubmeter={adicionarEvento}/>
       {temas.map(function (item){
         return (
         <section key={item.id}>
           <Tema tema={item} />
-          <CardEvento evento={eventos[0]} />
+          {eventos.map(function (item, index) {
+            return (
+            <CardEvento evento={item} key={index} />  
+            );
+          })}
         </section>
+        
         )
       })}
     
