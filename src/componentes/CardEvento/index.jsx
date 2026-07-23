@@ -6,10 +6,10 @@ export function CardEvento({ evento }) {
             <img src={evento.capa} alt={evento.titulo} />
             <div className="corpo">
                 <p className="tag">
-                    {evento.tema.nome}
+                    {evento.tema?.nome}
                 </p>
                 <p className="data">
-                    {evento.data.toLocaleDateString('pt-BR')}
+                    {new Date(evento.data).toLocaleDateString('pt-BR')}
                 </p>
 
                 <h4 className="titulo">

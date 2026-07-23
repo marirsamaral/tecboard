@@ -18,7 +18,7 @@ export function FormularioDeEvento({temas, aoSubmeter}) {
       data: new Date(formData.get('data-evento')),
       titulo: formData.get('nomeEvento'),
     }
-    aoSubmeter("esse é o evento", evento)
+    aoSubmeter(evento)
   }
   
   return (

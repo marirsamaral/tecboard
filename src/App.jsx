@@ -1,4 +1,5 @@
 import './App.css'
+import { useState } from 'react';
 import { Banner } from './componentes/Banner'
 import {FormularioDeEvento} from './componentes/FormularioDeEvento'
 import {Tema} from './componentes/Temas'
@@ -6,6 +7,7 @@ import {CardEvento} from './componentes/CardEvento'
 
 
 function App() {
+
 
   const temas = [
   {
@@ -39,18 +41,17 @@ function App() {
   },
   ]
 
-  const eventos = [
+  const [eventos, setEventos] = useState ( [
   {
     capa: 'https://raw.githubusercontent.com/viniciosneves/tecboard-assets/refs/heads/main/imagem_1.png',
     tema: temas[0],
     data: new Date(),
     titulo: 'Mulheres no Front-end',
   }
-  ]
+  ])
 
 function adicionarEvento (evento) {
-  eventos.push(evento)  ERRROOO NESSA LINHAA 
-  console.log('eventos =>', eventos)
+  setEventos([...eventos, evento])
 }
 
 
@@ -62,19 +63,37 @@ function adicionarEvento (evento) {
       </header>
       <Banner />
       <FormularioDeEvento temas={temas} aoSubmeter={adicionarEvento}/>
-      {temas.map(function (item){
+
+      <section className="container">
+        {temas.map(function (tema){
+          if (!eventos.some(function(evento) {
+            return evento.tema.id == tema.id
+          })) {
+            return null
+          }
         return (
-        <section key={item.id}>
-          <Tema tema={item} />
-          {eventos.map(function (item, index) {
+        <section key={tema.id}>
+          <Tema tema={tema} />
+
+            <div className="eventos">
+            {eventos.filter(function (evento) {
+              return evento.tema.id == tema.id
+            })
+            
+            .map(function (evento, index) {
             return (
-            <CardEvento evento={item} key={index} />  
+            <CardEvento evento={evento} key={index} />  
             );
-          })}
+            })}
+            </div>
+
+          
         </section>
         
         )
       })}
+
+      </section>
     
     </main>
   )
